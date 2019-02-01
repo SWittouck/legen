@@ -9,4 +9,8 @@ This repository contains a pipeline that I am developing to study the evolution 
 
 The scripts of this pipeline are meant to be run on a server (could also be a decent desktop computer); they take a while to run and/or work with larger datasets. That being said, not a single script should take longer than ~10 hours to run on a decent desktop computer and only a few scripts take that long. The intention is that the pipeline can be run without need for a supercomputer. The actual data analysis of the results of this pipeline is implemented in [this repository](https://github.com/SWittouck/legen_data_analysis); it contains very lightweight Rmarkdown scripts that can be run fast and locally and without requiring much disk space.
 
-It should be relatively straightforward to apply the pipeline to any set of up to a few thousand prokaryotic genomes. 
+It should be relatively straightforward to apply the pipeline to any set of up to a few thousand prokaryotic genomes.
+
+The results of this pipeline have been published as a preprint on bioRxiv:
+
+[Wittouck, Stijn, Sander Wuyts, Conor J Meehan, Vera van Noort, and Sarah Lebeer. 2019. “A Genome-Based Species Taxonomy of the Lactobacillus Genus Complex.” BioRxiv, January, 537084. doi:10.1101/537084.](https://www.biorxiv.org/content/10.1101/537084v1) 
