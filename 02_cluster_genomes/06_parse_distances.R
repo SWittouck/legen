@@ -1,16 +1,9 @@
 #!/usr/bin/env Rscript
 
-# dependency: tidyorthogroups version 0.0.0.9000
-
-# to install tiydorthogroups:
-# install.packages(devtools)
-# devtools::install_github("SWittouck/tidyorthogroups", dep = F)
-
 library(dplyr)
 library(tidyr)
 library(readr)
 library(stringr)
-library(tidyorthogroups)
 
 din_similarities <- "../data_v3/similarities"
 fin_cnis <- paste0(din_similarities, "/cnis/cnis.distmat")
@@ -19,6 +12,44 @@ fin_tetras <- paste0(din_similarities, "/tetras/TETRA_correlations.tab")
 fout_pairs <- paste0(din_similarities, "/genome_pairs.csv")
 
 gca_regex <- "GC[AF]_[0-9]+\\.[0-9]"
+
+# function duplicated from tidygenomes v0.1.0
+read_phylip_distmat <- function(path, skip = 8, include_diagonal = T) {
+  
+  distances_raw <- 
+    readr::read_tsv(path, col_names = F, skip = skip) %>%
+    separate(ncol(.), into = c("name", "number"), sep = " ")
+  
+  names <- distances_raw$name
+  
+  n <- length(names)
+  
+  distances <- 
+    distances_raw %>%
+    select_if(~ ! all(is.na(.))) %>%
+    select(1:(!! n)) %>%
+    `names<-`(names) %>%
+    mutate(sequence_1 = !! names) %>%
+    gather(key = "sequence_2", value = "distance", - sequence_1, na.rm = T) %>%
+    mutate_at("distance", as.double)
+  
+  distances_1 <- filter(distances, sequence_1 >= sequence_2)
+  
+  distances_2 <- 
+    distances %>%
+    filter(sequence_1 < sequence_2) %>%
+    mutate(sequence_1_temp = sequence_2, sequence_2_temp = sequence_1) %>%
+    select(sequence_1 = sequence_1_temp, sequence_2 = sequence_2_temp, distance)
+  
+  distances <- bind_rows(distances_1, distances_2)
+  
+  if (! include_diagonal) {
+    distances <- filter(distances, sequence_1 != sequence_2)
+  }
+  
+  distances
+  
+}
 
 # CNIs
 
