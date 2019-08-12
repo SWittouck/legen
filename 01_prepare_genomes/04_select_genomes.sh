@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# dependency: progenomics version 0.9
+# dependency: progenomics version 0.1.0
 
 threads=16
 

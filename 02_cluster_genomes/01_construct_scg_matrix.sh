@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# dependency: progenomics version 0.9
+# dependency: progenomics version 0.1.0
 
 fin_score_table=../data_v3/scgs/score_table.csv
 fin_candidate_scg_table=../data_v3/scgs/candidate_scg_table.csv

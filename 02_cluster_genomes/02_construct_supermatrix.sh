@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# dependency: progenomics version 0.9
+# dependency: progenomics version 0.1.0
 
 fin_scg_matrix=../data_v3/similarities/cnis/scg_matrix.csv
 din_ffns=../data_v3/genes/ffns

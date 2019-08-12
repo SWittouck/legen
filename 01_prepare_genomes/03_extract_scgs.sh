@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# dependencies: progenomics version 0.9, OrthoFinder version 2.1.2, 
+# dependencies: progenomics version 0.1.0, OrthoFinder version 2.1.2, 
 # blast version 2.6.0, MCL version 14-137, HMMER version 3.1b2, 
 # ROCR version 1.0.7
 

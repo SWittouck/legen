@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-# dependency: tidytypes version 0.0.0.9000
+# dependency: tidytypes version 0.1.0
 
 # Run this script with two command line arguments: the PNU username and
 # password. For example: ./02_get_type_genomes_and_16s_genes.R
