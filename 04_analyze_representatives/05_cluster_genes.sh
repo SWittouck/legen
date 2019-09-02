@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-fin_scg_matrix_subset=../data_v3/genome_clusters/scg_matrix_subset.csv
+fin_scg_matrix_subset=../data_v3/representatives_v3_2/scg_matrix.csv
 din_faas=../data_v3/genes/faas
-dout=../data_v3/representatives/orthofinder
+dout=../data_v3/representatives_v3_2/pangenome
 
 threads=16
 

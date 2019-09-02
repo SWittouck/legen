@@ -16,7 +16,7 @@ library(tidyr)
 
 fin_scg_matrix <- "../data_v3/similarities/cnis/scg_matrix.csv"
 fin_genomes_clusters <- "../data_v3/genome_clusters/genomes_clusters.csv"
-fout_scg_matrix_subset <- "../data_v3/genome_clusters/scg_matrix_subset.csv"
+fout_scg_matrix_subset <- "../data_v3/representatives_v3_2/scg_matrix.csv"
 
 n_orthogroups <- 100
 

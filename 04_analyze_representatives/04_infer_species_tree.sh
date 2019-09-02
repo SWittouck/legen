@@ -3,9 +3,9 @@
 # dependency: raxmlHPC-PTHREADS-AVX version 8.2.11
 
 fin_supermatrix_nucs=\
-../data_v3/genome_clusters/supermatrix/supermatrix_nucs_trimmed.fasta
+../data_v3/representatives_v3_2/supermatrix/supermatrix_nucs_trimmed.fasta
 dout_tree=\
-../data_v3/genome_clusters/phylogeny
+../data_v3/representatives_v3_2/phylogeny
 
 threads=16
 
