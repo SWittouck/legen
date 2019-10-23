@@ -4,8 +4,8 @@ from Bio import SeqIO
 import glob
 import re
 
-din_fastas_rrnas = "../data_v3/taxonomy/fastas_rrnas"
-fout_fasta_rrnas_16S = "../data_v3/taxonomy/rrnas_16S.fasta"
+din_fastas_rrnas = "../data_v3/taxonomy/lgc_rrnas"
+fout_fasta_rrnas_16S = "../data_v3/taxonomy/lgc_16S_genes.fasta"
 
 # make list of all fasta files in the rrnas folder
 fins_fastas_rrnas = glob.glob(din_fastas_rrnas + "/*.fasta")

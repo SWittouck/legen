@@ -4,7 +4,7 @@
 
 fin_genomes=../data_v3/quality_control/genome_list.txt
 din_genomes=../data_v3/genomes
-dout_fastas_rrnas=../data_v3/taxonomy/fastas_rrnas
+dout_fastas_rrnas=../data_v3/taxonomy/16S_blast/lgc_rrnas
 
 threads=16
 

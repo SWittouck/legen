@@ -11,7 +11,7 @@ library(tidytypes)
 
 fin_assembly_reports <- "../data_v3/taxonomy/genomes_assembly_reports.csv"
 fin_genome_list <- "../data_v3/quality_control/genome_list.txt"
-dout_taxonomy <- "../data_v3/taxonomy"
+dout_taxonomy <- "../data_v3/taxonomy/type_strains"
 
 genera <- c("Lactobacillus", "Pediococcus", "Leuconostoc", "Weissella", "Oenococcus", "Fructobacillus")
 
@@ -117,4 +117,4 @@ fasta %>%
   mutate(fasta = str_c(header, sequence, sep = "\n")) %>%
   mutate_at("fasta", str_trim) %>%
   pull(fasta) %>%
-  write_lines(paste0(dout_taxonomy, "/type_16s_genes_unidentified_names.fasta"))
+  write_lines(paste0(dout_taxonomy, "/type_16S_genes_unidentified_names.fasta"))
