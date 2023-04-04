@@ -1,21 +1,50 @@
-# Evolutionary Genomics of the Lactobacillus Genus Complex
+# Evolutionary Genomics of the Lactic Acid Bacteria
 
-This repository contains a pipeline that is being developed to study the evolution of the Lactobacillus Genus Complex (LGC) using public genome data.
+This repository contains a pipeline to study the evolution of the order Lactobacillales using public genome data.
 
-## Overview of steps
+## Dependencies
 
-Currently, only the first steps of the pipeline are available: these steps construct a _de novo_ species taxonomy for the LGC by performing single-linkage clustering on pairwise core nucleotide identities (CNIs). Each step is implemented in a separate folder with bash/R/python scripts:
+Software: 
 
-1. __Prepare genomes__: downloading of the genomes, gene prediction, extraction of single-copy core genes (SCGs) and quality control of the genomes.
-2. __Cluster genomes__: construction of a core genome supermatrix of the high-quality genomes, calculation of pairwise CNIs and other similarity measures (ANI, TETRA), single-linkage clustering of genomes based on CNIs with a 94% threshold, analysis of cluster "exclusivity" for various CNI clustering cutoffs.
-3. __Identify clusters__: gathering of the following information to be able to reconcile the genome clusters with published (sub)species names: NCBI assembly reports (these contain strain names for the genomes), published (sub)species names with their various type strain names (from LPSN, PNU and StrainInfo) and 16S rRNA sequences for published species without type strain genome; extraction of 16S sequences from the genomes; comparison of these sequences against the downloaded type strain 16S sequences.
-4. __Analyze representatives__: inference of various types of maximum likelihood trees of the LGC species using one representative genome for each species.
+* R v4.2.3
+* ProClasp v1.0
+* Prodigal v2.6.3
+* SCARAP version 1297a09 (and dependencies)
+* trimAl 1.4.rev15
+* IQ-TREE v1.6.12
 
-The scripts of this pipeline are meant to be run on a server (could also be a decent desktop computer); they take a while to run and/or work with larger datasets. That being said, not a single script should take longer than ~10 hours to run on a decent desktop computer and only a few scripts take that long. The intention is that the pipeline can be run without need for a cluster.
+R packages:
 
-It should be relatively straightforward to apply the pipeline to any set of up to a few thousand prokaryotic genomes.
+* tidyverse v2.0.0
+* tidygenomes v0.1.3
+
+## The data
+
+genomes_lactobacillales_gtdb-r207.tsv
+
+* metadata of all Lactobacillales genomes that are in release 95 of the GTDB
+* downloaded by the script src/lactobacillales/01_download_metadata.R
+
+genomes_lactobacillales_gtdb-r207
+
+* a selection of one high-quality genome per species (for Carnobacteriaceae) or per genus (for non-Carnobacteriaceae) downloaded from the NCBI
+* downloaded by the script src/lactobacillales/02_download_genomes.sh
+
+lpsn_gss_2023-03-23.csv
+
+* type strain names and other info for all validly published species, from LPSN
+* downloaded from https://lpsn.dsmz.de/downloads (PNU account required)
+
+## How to run? 
+
+Run each script with the script directory as working directory. E.g.:
+
+    cd src/01_prepare_genomes
+    ./01_download_metadata.R
 
 ## Data analyses based on this pipeline
+
+The following data analyses use the results of version 3 of this pipeline, which considered the family Lactobacillaceae (including the former family Leuconostocaceae). 
 
 ### Species-level taxonomy of the Lactobacillus Genus Complex
 
