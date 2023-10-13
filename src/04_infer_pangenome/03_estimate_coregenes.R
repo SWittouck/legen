@@ -34,7 +34,7 @@ genomes %>%
   geom_point() +
   theme_bw()
 
-# estimate orthogroup occurrences per species with 5 or more genomes
+# estimate orthogroup occurrences per species with at least n genomes
 pan_list <-
   genes %>%
   left_join(genomes %>% select(genome, species), by = "genome") %>%
