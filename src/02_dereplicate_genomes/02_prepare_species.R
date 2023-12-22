@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-# This script creates one folder per species that has more than two genomes. It
+# This script creates one folder per species that has two or more genomes. It
 # splits the core100 genes, ffnpaths and faapaths per species and stores them in
 # these folders. It does all this for the full genome dataset, and then again
 # but only for genomes with a quality >= 90%.

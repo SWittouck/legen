@@ -18,6 +18,5 @@ threads=32
 #   $dout_repr/core100 -p 0.9 -m 100 -t $threads
   
 # identify the top 100 core genes in all genomes 
-scarap search $fin_faapaths_all $dout_repr/core100 /mnt/d/stijn/core100 \
+scarap search $fin_faapaths_all $dout_repr/core100 $dout_all/core100 \
   -t $threads -c
-mv /mnt/d/stijn/core100 $dout_all
