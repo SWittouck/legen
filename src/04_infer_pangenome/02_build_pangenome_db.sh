@@ -24,3 +24,6 @@ scarap fetch $din_faas $fin_pseudogenomes $dio_pseudogenomes
 # build profile db for orthogroups occurring in at least two species
 scarap build $dio_pseudogenomes/fastas $fin_pseudopangenome $dout_db \
   -p 0.002 -t $threads
+
+# compress alignments
+gzip $dout_db/alignments/*.aln
