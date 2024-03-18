@@ -16,6 +16,7 @@ dout_results <- "../../results"
 # define paths for output files 
 dout_results_all <- paste0(dout_results, "/all")
 fout_metadata <- paste0(dout_results_all, "/genomes_metadata.csv")
+fout_species_updates <- paste0(dout_results_all, "/species_updates.csv")
 fout_accessions <- paste0(dout_results_all, "/genomes_accessions.txt")
 
 # create "results/all" folder if it doesn't exist
@@ -104,6 +105,9 @@ if (is_unique(species_updates$gtdb_species)) print("yes") else print("no")
 
 cat("Are the legen species names in name update table unique? --> ")
 if (is_unique(species_updates$species)) print("yes") else print("no")
+
+# write species updates
+species_updates %>% write_csv(fout_species_updates)
 
 # create a table with gtdb_species and species (which include the updates)
 species <-
