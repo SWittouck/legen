@@ -2,6 +2,26 @@
 
 This repository contains a pipeline to study the evolution of the order *Lactobacillales* using public genome data.
 
+## How to run? 
+
+Step 1: clone this repository: 
+
+    git clone https://github.com/swittouck/legen.git
+
+Step 2: install all [dependencies](#dependencies). 
+
+Step 3: create folders for data and results: 
+
+    cd legen
+    mkdir data results
+    
+Step 4: download type strain names of validly published species from [the LPSN](https://lpsn.dsmz.de/downloads) and put them in `data`. 
+
+Step 5: run all scripts in `src` in the order indicated by the file/folder names. Run each script directly from its parent directory. E.g.:
+
+    cd src/01_prepare_genomes
+    ./01_download_metadata.R
+
 ## Dependencies
 
 Software: 
@@ -9,7 +29,7 @@ Software:
 * R v4.2.3
 * ProClasp v1.0
 * Prodigal v2.6.3
-* SCARAP version 1297a09 (and dependencies)
+* SCARAP v0.4.0
 * trimAl 1.4.rev15
 * IQ-TREE v1.6.12
 
@@ -17,6 +37,7 @@ R packages:
 
 * tidyverse v2.0.0
 * tidygenomes v0.1.3
+* ape v5.7.1
 
 ## The data
 
@@ -34,13 +55,6 @@ lpsn_gss_2023-03-23.csv
 
 * type strain names and other info for all validly published species, from LPSN
 * downloaded from https://lpsn.dsmz.de/downloads (PNU account required)
-
-## How to run? 
-
-Run each script with the script directory as working directory. E.g.:
-
-    cd src/01_prepare_genomes
-    ./01_download_metadata.R
 
 ## Data analyses based on this pipeline
 

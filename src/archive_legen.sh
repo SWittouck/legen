@@ -7,6 +7,7 @@ tar czf legen_v4-1.tar.gz \
   representatives/genomes_metadata.csv \
   representatives/pangenome/pangenome.tsv \
   representatives/tree/lab.treefile \
+  representatives/tree/lab_rooted.tree \
   dereplicated/genomes_completeness.csv \
   dereplicated/genomes_metadata.csv \
   dereplicated/orthogroups_occurrence.csv \
