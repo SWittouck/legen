@@ -11,12 +11,12 @@ dout_all=../../results/all
 threads=32
 
 # infer the pangenome of the representative genomes 
-scarap pan $fin_faapaths_repr $dout_repr/pan -t $threads
+scarap pan $fin_faapaths_repr $dout_repr/pangenome -t $threads
 
 # build a profile database of the top 100 single-copy core genes 
-scarap build $fin_faapaths_repr $dout_repr/pan/pangenome.tsv \
+scarap build $fin_faapaths_repr $dout_repr/pangenome/pangenome.tsv \
   $dout_repr/core100 -p 0.9 -m 100 -t $threads
   
 # identify the top 100 core genes in all genomes 
 scarap search $fin_faapaths_all $dout_repr/core100 $dout_all/core100 \
-  -t $threads -c
+  -t $threads
