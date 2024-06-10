@@ -39,7 +39,7 @@ genomes <-
     gtdb_family = str_extract(gtdb_taxonomy, "(?<=f__)[^;]+"),
     quality = checkm_completeness / 100 - checkm_contamination / 100,
     checkm_completeness, checkm_contamination, ncbi_isolation_source,
-    ncbi_strain_identifiers, gtdb_representative
+    ncbi_strain_identifiers, gtdb_representative, gc_percentage, genome_size
   )
 
 # create list of Lactobacillales genera according to the GTDB
