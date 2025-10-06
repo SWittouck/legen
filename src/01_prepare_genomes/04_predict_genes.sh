@@ -2,13 +2,13 @@
 
 # This script predicts and translates genes for all assemblies. 
 
-# dependency: Prodigal v2.6.3
+# dependency: Prodigal
 
-din_fnas=../../data/genomes_lactobacillales_gtdb-r207
+din_fnas=../../data/genomes_lactobacillales_gtdb-r226
 dout_prodigal=../../results/all/genes
 dout_paths=../../results/all
 
-threads=32
+threads=16
 
 # make output dirs if they don't exist
 for dout in $dout_prodigal/{gffs,ffns,faas,logs} ; do
@@ -59,7 +59,3 @@ ls $din_fnas | grep \.fna\.gz | parallel \
   --no-notice \
   --verbose \
   predict_genes $din_fnas/{} $dout_prodigal
-
-# write faapaths and ffnpaths
-ls $dout_prodigal/faas/*.faa.gz > $dout_paths/faapaths.txt
-ls $dout_prodigal/ffns/*.ffn.gz > $dout_paths/ffnpaths.txt
