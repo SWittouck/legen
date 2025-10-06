@@ -1,0 +1,8 @@
+# to use this environment:
+# conda env create -f ./environment.yml -p ./env
+# conda activate ./env
+name: legen
+dependencies:
+- r-base=4.5.1
+- r-tidyverse=2.0.0
+- bioconda::prodigal=2.6.3
