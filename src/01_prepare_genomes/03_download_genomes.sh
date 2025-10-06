@@ -5,12 +5,34 @@
 
 # dependencies: ProClasp v1.0
 
-fin=../../results/all/genomes_accessions.txt
-dout=../../data/genomes_lactobacillales_gtdb-r207
+fin=../../results/all/accessions.txt
+dout=../../data/genomes_lactobacillales_gtdb-r226
 fout_log=../../results/all/download_fnas.log
 
-if ! [ -d $dout ] ; then
+# create output folder
+[ -d $dout ] || mkdir -p $dout
 
-  download_fnas.sh $fin $dout 2>&1 | tee $fout_log
+# loop over assembly accessions
+for acc in $(cat $fin | cut -f 1) ; do
 
-fi
+  echo $acc
+  url=ftp.ncbi.nlm.nih.gov/genomes/all/${acc:0:3}/${acc:4:3}/${acc:7:3}/${acc:10:3}/${acc}*/${acc}*_genomic.fna.gz
+
+  exitcode=1 
+  attempt=1
+  while [[ $exitcode -ne 0 ]] && [[ $attempt -le 5 ]] ; do
+    if [[ $attempt -ne 1 ]] ; then sleep 30 ; echo attempt $attempt ; fi
+    rsync --copy-links --times --verbose \
+      --exclude *_cds_from_genomic.fna.gz \
+      --exclude *_rna_from_genomic.fna.gz \
+      --exclude *_wgsmaster.gbff.gz \
+      rsync://$url $dout # > /dev/null 2>&1
+    exitcode=$?
+    attempt=$((attempt + 1))
+    if [[ $exitcode -ne 0 ]] && [[ $attempt -eq 6 ]] ; then 
+      echo failure
+      echo $acc >> $dout/failed.txt
+    fi
+  done
+
+done
