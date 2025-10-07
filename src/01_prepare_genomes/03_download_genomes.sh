@@ -3,11 +3,9 @@
 # This script downloads an assembly (.fna file) from the NCBI database for all 
 # genomes. 
 
-# dependencies: ProClasp v1.0
-
-fin=../../results/all/accessions.txt
-dout=../../data/genomes_lactobacillales_gtdb-r226
-fout_log=../../results/all/download_fnas.log
+fin=../../data/genomes_selected.txt
+dout=../../data/lactobacillales_gtdb-r226
+fout_fails=../../data/genomes_failed.txt
 
 # create output folder
 [ -d $dout ] || mkdir -p $dout
@@ -31,7 +29,7 @@ for acc in $(cat $fin | cut -f 1) ; do
     attempt=$((attempt + 1))
     if [[ $exitcode -ne 0 ]] && [[ $attempt -eq 6 ]] ; then 
       echo failure
-      echo $acc >> $dout/failed.txt
+      echo $acc >> $fout_fails
     fi
   done
 

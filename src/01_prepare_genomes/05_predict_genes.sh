@@ -4,9 +4,8 @@
 
 # dependency: Prodigal
 
-din_fnas=../../data/genomes_lactobacillales_gtdb-r226
+din_fnas=../../data/lactobacillales_gtdb-r226
 dout_prodigal=../../results/all/genes
-dout_paths=../../results/all
 
 threads=16
 

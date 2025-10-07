@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
 
-# This script extracts relevant metadata of all genomes, selects high-quality
-# genomes, updates the names of species that received an sp number by the GTDB
-# but have validly published names and selects representative genomes of
-# species.
+# This script (1) selects relevant metadata of all selected (high quality)
+# genomes, (2) removes metadata of genomes for which the download failed, (3)
+# updates the names of species that received an sp number by the GTDB but have
+# validly published names and (4) selects representative genomes of species.
 
 # dependencies: R, tidyverse
 
@@ -12,6 +12,8 @@ library(tidyverse)
 # define paths of input and output
 fin_gtdb <- "../../data/lactobacillales_gtdb-r226.tsv.gz"
 fin_lpsn <- "../../data/lpsn_gss_2025-10-03.csv"
+fin_selected <- "../../data/genomes_selected.txt"
+fin_failed <- "../../data/genomes_failed.txt"
 dout_results <- "../../results"
 
 # define paths for output files 
@@ -29,7 +31,11 @@ genomes_full <- fin_gtdb %>% read_tsv(col_types = cols())
 # read lpsn species table
 species_lpsn <- read_csv(fin_lpsn, col_types = cols())
 
-# extract relevant metadata
+# read lists of selected genomes and genomes for which the download failed
+genomes_selected <- read_lines(fin_selected)
+genomes_failed <- read_lines(fin_failed)
+
+# select relevant metadata
 genomes <-
   genomes_full %>%
   transmute(
@@ -41,10 +47,10 @@ genomes <-
     ncbi_strain_identifiers, gtdb_representative, gc_percentage, genome_size
   )
 
-# select high quality genomes
-genomes <-
+# keep selected genomes whose download did not fail
+genomes <- 
   genomes %>%
-  filter(checkm2_completeness >= 90, checkm2_contamination <= 5)
+  filter(genome %in% {{genomes_selected}}, ! genome %in% {{genomes_failed}})
 
 # create list of lactobacillales genera according to the gtdb
 lacto_genera <- unique(genomes$gtdb_genus)
