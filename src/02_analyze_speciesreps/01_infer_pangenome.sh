@@ -1,13 +1,17 @@
+#!/usr/bin/env bash
+
 # This script infers the pangenome of representative genomes for species
 # of Lactobacillales. 
 
-# dependencies: SCARAP v0.4.0 (bde4a13)
+# dependencies: SCARAP
 
-fin_faapaths=../../results/representatives/faapaths.txt
-dout=../../results/representatives
+din_faas=../../results/all/genes/faas/
+fin_accessions=../../results/speciesreps/accessions.txt
+dout=../../results/speciesreps/
 
-threads=32
+threads=16
 
 # infer the pangenome of the representative genomes 
-scarap pan $fin_faapaths $dout/pangenome -t $threads
-
+sed "s|^|$din_faas|; s|\$|.faa.gz|" $fin_accessions > $dout/faapaths.txt
+scarap pan $dout/faapaths.txt $dout/pangenome -t $threads
+rm $dout/faapaths.txt
