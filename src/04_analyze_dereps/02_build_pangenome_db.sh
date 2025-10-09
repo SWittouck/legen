@@ -8,13 +8,13 @@
 # orthogroups present in at least two species will be represented in the 
 # database. 
 
-# dependencies: SCARAP version e5d00e6
+# dependencies: SCARAP
 
 din_faas=../../results/all/genes/faas
-fin_pseudogenomes=../../results/dereplicated/pangenome/pseudogenomes.tsv
-fin_pseudopangenome=../../results/dereplicated/pangenome/pseudopangenome.tsv
-dio_pseudogenomes=../../results/dereplicated/pseudogenomes
-dout_db=../../results/dereplicated/pangenome-db
+fin_pseudogenomes=../../results/dereps/pangenome/pseudogenomes.tsv
+fin_pseudopangenome=../../results/dereps/pangenome/pseudopangenome.tsv
+dio_pseudogenomes=../../results/dereps/pseudogenomes
+dout_db=../../results/dereps/pangenome-db
 
 threads=16
 
@@ -26,4 +26,4 @@ scarap build $dio_pseudogenomes/fastas $fin_pseudopangenome $dout_db \
   -p 0.002 -t $threads
 
 # compress alignments
-gzip $dout_db/alignments/*.aln
+find $dout_db/alignments -name "*.aln" -exec gzip '{}' \;
