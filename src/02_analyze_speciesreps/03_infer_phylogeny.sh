@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
 
-# This scripts infers a ML tree on the trimmed supermatrix. 
+# This scripts infers a ML tree on the trimmed supermatrix of species 
+# representative genomes. 
 
-# dependency: IQ-TREE v1.6.12
+# dependency: IQ-TREE
 
-din=../../results/representatives/supermatrix
-dout=../../results/representatives/tree
+din=../../results/speciesreps/supermatrix
+dout=../../results/speciesreps/tree
 
 threads=16
 
 [ -d $dout ] || mkdir -p $dout
 
+# decompress supermatrices
+gunzip $din/supermatrix_aas_trimmed.fasta.gz
+
+# infer maximum likelihood tree
 # remark: Ziheng Yang advises against I+G models in section 4.3.1.4 of his book
 iqtree \
   -s $din/supermatrix_aas_trimmed.fasta \
-  -pre $dout/lab \
+  --prefix $dout/concat \
   -m LG+F+G4 \
-  -alrt 1000 -bb 1000 \
-  -nt $threads \
+  -B 1000 \
+  -T AUTO \
   -mem 60G
+  
+# compress supermatrix
+gzip $din/supermatrix_aas_trimmed.fasta

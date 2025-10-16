@@ -3,13 +3,13 @@
 # This script roots the species phylogeny of Lactobacillales using the family
 # Listeriaceae as outgroup clade. 
 
-# dependencies: R v4.4.0, tidyverse v2.0.0, ape v5.7.1
+# dependencies: R, tidyverse, ape
 
 library(tidyverse)
 
-fin_tree <- "../../results/representatives/tree/lab.treefile"
-fin_genomes <- "../../results/representatives/genomes_metadata.csv"
-fout_tree <- "../../results/representatives/tree/lab_rooted.tree"
+fin_tree <- "../../results/speciesreps/tree/concat.treefile"
+fin_genomes <- "../../results/speciesreps/genomes.csv"
+fout_tree <- "../../results/speciesreps/tree/concat.tree.rooted"
 
 # read tree and genome metadata
 tree <- ape::read.tree(fin_tree)
