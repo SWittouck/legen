@@ -1,28 +1,37 @@
 # This script calculates some summary numbers on the LEGEN output files.
 
-metadata_all=../results/all/genomes_metadata.csv
-metadata_derep=../results/dereplicated/genomes_species.tsv
-pangenome_derep=../results/dereplicated/pangenome/pangenome.tsv
+all=../data/lactobacillales_gtdb-r226.tsv.gz
+selected=../results/all/genomes.csv
+speciesreps=../results/speciesreps/genomes.csv
+dereps=../results/dereps/genomes.csv
 
-echo "Number of genomes:"
-tail -n +2 $metadata_all | wc -l
+pan_speciesreps=../results/speciesreps/pangenome/pangenome.tsv
+pan_dereps=../results/dereps/pangenome/pangenome.tsv
+
+echo "Total genomes:"
+zcat $all | tail -n +2 | wc -l
 echo 
 
-echo "Number of species:"
-tail -n +2 $metadata_all | cut -d "," -f 2 | sort -u | wc -l 
+echo "Total species:"
+zcat $all | tail -n +2 | cut -f 20 | sort -u | wc -l 
 echo 
 
-echo "Number of high-quality genomes": 
-tail -n +2 $metadata_all | awk -F ',' '{ if ($5 >= 0.90) print $1 }' | wc -l 
+echo "High-quality (= selected) genomes:"
+tail -n +2 $selected | wc -l
 echo 
 
-echo "Number of species with high-quality genomes:"
-cut -f 2 $metadata_derep | sort -u | wc -l
+echo "High-quality (= selected) species:"
+tail -n +2 $speciesreps | wc -l
+echo 
+
+echo "Orthogroups in pangenome of species representatives:"
+cut -f 3 $pan_speciesreps | sort -u | wc -l
 echo
 
-echo "Number of dereplicated genomes:"
-cat $metadata_derep | wc -l
+echo "Dereplicated genomes:"
+tail -n +2 $dereps | wc -l
 echo 
 
-echo "Number of orthogroups in dereplicated genomes:"
-cut -f 3 $pangenome_derep | sort -u | wc -l
+echo "Orthogroups in pangenome of dereplicated genomes:"
+cut -f 3 $pan_dereps | sort -u | wc -l
+echo
