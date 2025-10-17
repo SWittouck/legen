@@ -3,6 +3,16 @@
 # conda activate ./env
 name: legen
 dependencies:
+- python=3.11.0 # eggnog-mapper requires python <3.12
 - r-base=4.5.1
 - r-tidyverse=2.0.0
+- r-ape=5.8_1
 - bioconda::prodigal=2.6.3
+- bioconda::scarap=1.0.1 # scarap v1.0.0 gives "too many arguments" error
+- bioconda::trimal=1.5.0
+- bioconda::iqtree=3.0.1
+- bioconda::eggnog-mapper=2.1.13
+- pip 
+- pip: 
+    - biopython==1.85
+    - pandas==2.3.3
