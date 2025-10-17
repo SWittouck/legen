@@ -8,53 +8,78 @@ Step 1: clone this repository:
 
     git clone https://github.com/swittouck/legen.git
 
-Step 2: install all [dependencies](#dependencies). 
-
-Step 3: create folders for data and results: 
+Step 2: create folders for data and results: 
 
     cd legen
     mkdir data results
     
-Step 4: download type strain names of validly published species from [the LPSN](https://lpsn.dsmz.de/downloads) and put them in `data`. 
+Step 3: download type strain names of validly published species from the LPSN:
 
-Step 5: run all scripts in `src` in the order indicated by the file/folder names. Run each script directly from its parent directory. E.g.:
+1. Go to https://lpsn.dsmz.de/downloads
+2. Log in (create an account if you do not yet have one)
+3. Download the genera, species and subspecies (GSS) list (e.g. "lpsn_gss_2025-10-03.csv")
+4. Put the list in the data folder
+
+Step 4: install all [dependencies](#dependencies): 
+
+    conda env create -f ./environment.yml -p ./env
+    conda activate ./env
+    
+Step 5: install the EggNOG database (required for functional annotation): 
+
+    download_eggnog_data.py --data_dir data/eggnog
+
+Step 6: run all scripts in `src` in the order indicated by the file/folder names. Run each script directly from its parent directory. E.g.:
 
     cd src/01_prepare_genomes
     ./01_download_metadata.R
 
+Step 7: deactivate the conda environment: 
+
+    conda deactivate
+
 ## Dependencies
 
-Software: 
+See [environment.yml](environment.yml). 
 
-* R v4.2.3
-* ProClasp v1.0
-* Prodigal v2.6.3
-* SCARAP v0.4.0
-* trimAl 1.4.rev15
-* IQ-TREE v1.6.12
+## LEGEN versions 
 
-R packages:
-
-* tidyverse v2.0.0
-* tidygenomes v0.1.3
-* ape v5.7.1
+| LEGEN version | GTDB version | year |
+| :------------ | :----------- | :--- |
+| v3            | /            | 2018 | 
+| v4            | r207         | 2022 |
+| v5            | r226         | 2025 | 
 
 ## The data
 
-genomes_lactobacillales_gtdb-r207.tsv
+lactobacillales_gtdb-r226.tsv
 
-* metadata of all *Lactobacillales* genomes that are in release 207 of the GTDB
-* downloaded by the script src/lactobacillales/01_download_metadata.R
+* metadata of all *Lactobacillales* genomes that are in release 226 of the GTDB
+* downloaded by the script src/01_prepare_genomes/01_download_metadata.R
 
-genomes_lactobacillales_gtdb-r207
+genomes_selected.txt
 
-* a selection of one high-quality genome per species (for *Carnobacteriaceae*) or per genus (for non-*Carnobacteriaceae*) downloaded from the NCBI
-* downloaded by the script src/lactobacillales/02_download_genomes.sh
+* assembly accessions of high-quality genomes
+* created by the script src/01_prepare_genomes/02_select_genomes.R
 
-lpsn_gss_2023-03-23.csv
+lactobacillales_gtdb-r226
+
+* assemblies (.fna files) of selected genomes
+* downloaded by the script src/01_prepare_genomes/03_download_genomes.sh
+
+genomes_failed.txt
+
+* assembly accessions of selected genomes whose download failed
+* created by the script src/01_prepare_genomes/03_download_genomes.sh 
+
+lpsn_gss_2025-10-03.csv
 
 * type strain names and other info for all validly published species, from LPSN
 * downloaded from https://lpsn.dsmz.de/downloads (PNU account required)
+
+eggnog
+
+* the EggNOG database, version 5
 
 ## Data analyses based on this pipeline
 
