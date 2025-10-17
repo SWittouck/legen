@@ -11,7 +11,7 @@ dio <- "../../results/speciesreps/annotation/"
 fin_sample <- paste0(dio, "sample.tsv.gz")
 fin_annot <- paste0(dio, "annotation/lacto.emapper.annotations.tsv.gz")
 fout_annot <- paste0(dio, "orthogroups_functions.csv")
-fout_log <- paste0(dio, "orthogroup_functions.log")
+fout_log <- paste0(dio, "orthogroups_functions.log")
 
 # read the necessary gene tables
 colnames <- c("gene", "genome", "orthogroup")
