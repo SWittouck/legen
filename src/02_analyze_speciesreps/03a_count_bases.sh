@@ -13,7 +13,7 @@ dout=../../results/speciesreps/gc_content
 [ -d $dout ] || mkdir $dout
 
 # count bases
-./count_bases.py $din_ffns $fin_acc > $dout/basecounts.csv
+../tools/count_bases.py $din_ffns $fin_acc > $dout/basecounts.csv
 
 # compress counts 
 gzip $dout/basecounts.csv
